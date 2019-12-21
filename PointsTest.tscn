@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://PointsTest.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Area2D.gd" type="Script" id=3]
+[ext_resource path="res://icon.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 50.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="A" type="Position2D" parent="."]
+position = Vector2( 346.574, 380.111 )
+
+[node name="B" type="Position2D" parent="."]
+position = Vector2( 575.861, 248.097 )
+
+[node name="C" type="Position2D" parent="."]
+position = Vector2( 703.763, 224.465 )
+
+[node name="D" type="Position2D" parent="."]
+position = Vector2( 352.101, 276.4 )
+
+[node name="E" type="Position2D" parent="."]
+position = Vector2( 282.215, 138.28 )
+
+[node name="F" type="Position2D" parent="."]
+position = Vector2( 657.549, 50.6147 )
+
+[node name="G" type="Position2D" parent="."]
+position = Vector2( 882.454, 45.7733 )
+
+[node name="H" type="Position2D" parent="."]
+position = Vector2( 929.548, 238.109 )
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 110.701, 157.555 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="icon"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="icon/Area2D"]
+shape = SubResource( 1 )

@@ -25,6 +25,9 @@ var active = false
 
 signal solved
 signal unsolved
+signal start_solving
+signal end_solving
+
 const size_factor = 2
 
 func _ready():
@@ -44,7 +47,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.get_mouse_mode()!=Input.MOUSE_MODE_CAPTURED or not active: return
+	if not active: return
 	var previous_position = current_position
 	current_position = current_position+relative_motion.clamped(10)
 	relative_motion = Vector2()
@@ -72,13 +75,13 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index==BUTTON_LEFT:
 			if event.pressed:
-				if Input.get_mouse_mode()==Input.MOUSE_MODE_CAPTURED and active:
+				if active:
 					var pt = astar.get_closest_point(current_position)
 					if pt in end_ids:
 						if astar.get_point_position(pt).distance_to(current_position)<4:
-							Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 							is_solved = true
 							emit_signal("solved")
+							emit_signal("end_solving")
 							var vp_camera = get_tree().root.get_camera()
 							get_viewport().warp_mouse(current_position)
 							active = false
@@ -91,10 +94,9 @@ func _input(event):
 						path = [pt]
 						last_point=pt
 						current_position = astar.get_point_position(pt)
-						Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 						active = true
+						emit_signal("start_solving")
 		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			if !path.empty():
 				get_viewport().warp_mouse(astar.get_point_position(path.front()))
 			if is_solved:
@@ -103,11 +105,11 @@ func _input(event):
 			path = []
 			last_point = 0
 			active = false
+			emit_signal("end_solving")
 			update()
 	if event is InputEventMouseMotion:
 		relative_motion = event.relative
 	if event is InputEventKey and Input.is_key_pressed(KEY_ESCAPE):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		if !path.empty():
 			get_viewport().warp_mouse(astar.get_point_position(path.front()))
 		if not is_solved:
@@ -116,6 +118,7 @@ func _input(event):
 		path = []
 		last_point = 0
 		active = false
+		emit_signal("end_solving")
 		update()
 		
 

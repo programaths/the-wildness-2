@@ -1,4 +1,4 @@
-extends StaticBody
+extends CollisionObject
 
 
 # Declare member variables here. Examples:
@@ -13,6 +13,7 @@ func _ready():
 	set_process_input(true)
 
 func activate(click_pos):
+	print(click_pos)
 	# Use click pos (click in 3d space, convert to area space)
 	var pos = get_global_transform().affine_inverse()
 	# the click pos is not zero, then use it to convert from 3D space to area space
@@ -26,8 +27,9 @@ func activate(click_pos):
 	# Convert to viewport coordinate system
 	# Convert pos to a range from (0 - 1)
 	pos.y *= -1
-	pos += Vector2(1, 1)
-	pos = pos / 2
+	pos += Vector2(0.5, 0.5)
+#	pos = pos / 2
+	print(pos)
   
 	# Convert pos to be in range of the viewport
 	pos.x *= viewport.size.x

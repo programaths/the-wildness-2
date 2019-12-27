@@ -20,3 +20,9 @@ func _draw():
 		var nodeB:Position2D=get_node_or_null(nodePathB)
 		if nodeA and nodeB:
 			draw_line(nodeA.position,nodeB.position,Color.white,8)
+
+func get_node_a()->TGraphNode:
+	return get_node_or_null(nodePathA) as TGraphNode
+
+func get_node_b()->TGraphNode:
+	return get_node_or_null(nodePathB) as TGraphNode

@@ -1,0 +1,14 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://textures/basic/AncientBrick.png" type="Texture" id=1]
+[ext_resource path="res://textures/basic/AncientBrick_normals.png" type="Texture" id=2]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+roughness = 0.51
+normal_enabled = true
+normal_scale = 1.22
+normal_texture = ExtResource( 2 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 6.72715
+uv2_triplanar_sharpness = 2.07053

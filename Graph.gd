@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name TGraph
+
 var astar:Pathing2D
 var current_position = Vector2()
 var relative_motion = Vector2()
@@ -20,6 +22,8 @@ var bounds = {
 		"p":Vector2(0,0)
 	}
 
+var constraints = []
+
 var is_solved = false
 var active = false
 
@@ -39,6 +43,8 @@ func _ready():
 				start_ids.push_back(node.node_number)
 			if node.point_type==2:
 				end_ids.push_back(node.node_number)
+		if node is Constraint:
+			constraints.append(node)
 	for node in get_children():
 		if node is Connector:
 			var nodeA:Position2D=node.get_node(node.nodePathA)
@@ -79,12 +85,24 @@ func _input(event):
 					var pt = astar.get_closest_point(current_position)
 					if pt in end_ids:
 						if astar.get_point_position(pt).distance_to(current_position)<4:
-							is_solved = true
-							emit_signal("solved")
-							emit_signal("end_solving")
-							var vp_camera = get_tree().root.get_camera()
-							get_viewport().warp_mouse(current_position)
-							active = false
+							if is_valid():
+								is_solved = true
+								emit_signal("solved")
+								emit_signal("end_solving")
+								var vp_camera = get_tree().root.get_camera()
+								get_viewport().warp_mouse(current_position)
+								active = false
+							else:
+								if !path.empty():
+									get_viewport().warp_mouse(astar.get_point_position(path.front()))
+								if is_solved:
+									is_solved = false
+									emit_signal("unsolved")
+								path = []
+								last_point = 0
+								active = false
+								emit_signal("end_solving")
+								update()
 				else:
 					var pt = astar.get_closest_point(event.position)
 					if pt in start_ids and not active and astar.get_point_position(pt).distance_to(event.position)<50:
@@ -120,7 +138,84 @@ func _input(event):
 		active = false
 		emit_signal("end_solving")
 		update()
-		
+
+func previous_node(a:int):
+	var cur_node_idx = path.find(a)
+	if cur_node_idx<1:
+		return -1
+	return path[cur_node_idx-1]
+
+func next_node(a:int):
+	var cur_node_idx = path.find(a)
+	if cur_node_idx<0 || cur_node_idx==path.size()-1:
+		return -1
+	return path[cur_node_idx+1]
+
+func contains_node(a:int):
+	return path.has(a)
+
+func contains_segment(a:int,b:int,directional:bool=true):
+	if path.size()<2:
+		return false
+	var idx_a=path.find(a)
+	if idx_a==-1:
+		return false
+	var idx_b=path.find(b)
+	if idx_b==-1:
+		return false
+	if directional:
+		return idx_b-idx_a == 1
+	else:
+		return abs(idx_b-idx_a) == 1
+
+func comes_before(a:int,b:int):
+	print("is node #",a," before node #", b, "in path ",path)
+	if path.size()<2:
+		return false
+	var idx_a=path.find(a)
+	if idx_a==-1:
+		return false
+	var idx_b=path.find(b)
+	if idx_b==-1:
+		return false
+	print(a,b)
+	print(idx_a,'<',idx_b,'?')
+	return idx_a<idx_b
+
+
+func path_distance(a:int,b:int):
+	if path.size()<2:
+		return -1
+	var idx_a=path.find(a)
+	if idx_a==-1:
+		return -1
+	var idx_b=path.find(b)
+	if idx_b==-1:
+		return -1
+	return idx_b-idx_a
+
+func is_valid():
+	var valid = true
+	var validation_context = {}
+	var node_constraints = {}
+	for c in constraints:
+		if "target_node" in c:
+			var target_node = c.get_node(c.target_node) as TGraphNode
+			if target_node:
+				var node_cs : Array = node_constraints.get(target_node.node_number,[])
+				node_cs.append(c)
+				node_constraints[target_node.node_number] = node_cs
+		if c.has_method("collect"):
+			c.collect(self,validation_context)
+	for p_idx in range(path.size()):
+		var p_num = path[p_idx]
+		var node_cs:Array=node_constraints.get(p_num,[])
+		for node_c in node_cs:
+			if node_c.has_method("collect_path"):
+				node_c.collect_path(p_idx,validation_context)
+	for c in constraints:
+		valid = c.validate(self,validation_context) && valid
+	return valid
 
 func _draw():
 	for s in astar.segments():

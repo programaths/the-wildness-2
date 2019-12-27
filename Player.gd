@@ -28,7 +28,7 @@ func _input(event):
 		var space_state : BulletPhysicsDirectSpaceState = get_world().direct_space_state
 		var from= camera.project_ray_origin(event.global_position)
 		var to = from + camera.project_ray_normal(event.global_position)*10000
-		var isect = space_state.intersect_ray(from,to)
+		var isect = space_state.intersect_ray(from,to,[self],1,true,true)
 		if isect and isect.collider.has_method("activate"):
 			print(isect)
 			isect.collider.activate(isect.position)
@@ -73,3 +73,7 @@ func _on_Puzzle_start_solving():
 	
 
 
+
+
+func _on_Puzzle0_start_solving():
+	pass # Replace with function body.

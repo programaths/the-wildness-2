@@ -3,6 +3,8 @@ extends Constraint
 
 export var target_edge:NodePath setget set_target_edge
 export var color:Color=Color.red setget set_color
+export var allow_same_color = false
+export var required = false
 
 func _ready():
 	update()
@@ -24,9 +26,9 @@ func validate(graph:TGraph,validation_context:Dictionary):
 			var counts:Dictionary = validation_context.get("pass_on_edge",{})
 			counts[color] = counts.get(color,0) + 1
 			validation_context.pass_on_edge = counts
-			return counts[color]<2
+			return counts[color]<2 || allow_same_color
 		else:
-			return true
+			return !required
 	return false
 
 func _draw():

@@ -4,6 +4,7 @@
 [ext_resource path="res://textures/basic/AncientBrick_normals.png" type="Texture" id=2]
 
 [resource]
+flags_albedo_tex_force_srgb = true
 albedo_texture = ExtResource( 1 )
 roughness = 0.51
 normal_enabled = true

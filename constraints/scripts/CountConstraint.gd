@@ -16,6 +16,7 @@ func validate(graph:TGraph,validation_context:Dictionary):
 			print(validation_context)
 			if c.validate(graph,validation_context):
 				nb_valid += 1
+	print("nb_valid= ",nb_valid)
 	match comparison:
 		COMPARISON_TYPE.EQUAL:
 			return nb_valid == count

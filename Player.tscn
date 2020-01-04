@@ -6,14 +6,17 @@
 radius = 0.5
 height = 1.8
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=2]
 flags_unshaded = true
 flags_no_depth_test = true
 flags_fixed_size = true
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
+params_blend_mode = 2
+params_line_width = 5.5
+params_point_size = 5.5
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=3]
 script/source = "extends ImmediateGeometry
 
 func _ready():
@@ -24,7 +27,7 @@ func draw_empty_circle():
 	clear()
 	begin(Mesh.PRIMITIVE_LINE_LOOP)
 	for i in range(10):
-		add_vertex(UP.rotated(Vector3.FORWARD,i*TAU/10))
+		add_vertex(UP.rotated(Vector3.FORWARD,i*TAU/10)*4)
 	end()
 "
 
@@ -39,9 +42,21 @@ shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="Pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29421, 0 )
+current = true
+size = 0.1
+frustum_offset = Vector2( 0.544, 0 )
 
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="Pivot/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.274196 )
-material_override = SubResource( 3 )
+material_override = SubResource( 2 )
 cast_shadow = 0
-script = SubResource( 2 )
+script = SubResource( 3 )
+
+[node name="SpotLight" type="SpotLight" parent="Pivot/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0106344, 0 )
+spot_range = 10.0
+spot_attenuation = 3.73213
+spot_angle_attenuation = 3.36358
+
+[node name="PuzzleCamera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29554, 0 )

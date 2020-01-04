@@ -31,6 +31,7 @@ signal solved
 signal unsolved
 signal start_solving
 signal end_solving
+signal dot_position_changed(dot_position)
 
 const size_factor = 2
 
@@ -61,12 +62,15 @@ func _process(delta):
 	if !path.empty():
 		if bounds.a.id!=path.back() and bounds.b.id!=path.back():
 			current_position = previous_position
+			emit_signal("dot_position_changed",current_position)
 			return
 	var going_to=astar.moving_toward(previous_position,current_position,bounds.a,bounds.b)
 	if !path.empty() and path.has(going_to.to.id) and path.back()!=going_to.to.id and current_position.distance_to(going_to.to.position)<20:
 		current_position = previous_position
+		emit_signal("dot_position_changed",current_position)
 		return
 	current_position = bounds.p
+	emit_signal("dot_position_changed",current_position)
 	if !path.empty():
 		if !path.has(going_to.to.id) and current_position.distance_to(going_to.to.position)<10:
 			path.push_back(going_to.to.id)
@@ -114,6 +118,8 @@ func _input(event):
 						current_position = astar.get_point_position(pt)
 						active = true
 						emit_signal("start_solving")
+						if get_tree().root == get_parent():
+							Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			if !path.empty():
 				get_viewport().warp_mouse(astar.get_point_position(path.front()))
@@ -138,6 +144,8 @@ func _input(event):
 		active = false
 		emit_signal("end_solving")
 		update()
+		if get_tree().root == get_parent():
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func previous_node(a:int):
 	var cur_node_idx = path.find(a)

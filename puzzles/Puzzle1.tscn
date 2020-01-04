@@ -1,108 +1,1160 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Graph.tscn" type="PackedScene" id=1]
-[ext_resource path="res://GraphNode.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Connector.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GraphNode.gd" type="Script" id=1]
+[ext_resource path="res://Connector.gd" type="Script" id=2]
+[ext_resource path="res://Graph.gd" type="Script" id=3]
+[ext_resource path="res://constraints/PassOnNodeConstraint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://constraints/decals/Triangles.tscn" type="PackedScene" id=5]
+[ext_resource path="res://constraints/CountConstraint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://constraints/PassOnEdgeConstraint.tscn" type="PackedScene" id=7]
 
-[node name="Puzzle1" instance=ExtResource( 1 )]
+[node name="Puzzle1" type="Node2D"]
+script = ExtResource( 3 )
 
-[node name="AB" parent="." index="0" instance=ExtResource( 3 )]
-nodePathA = NodePath("../A")
-nodePathB = NodePath("../B")
+[node name="DC_DE" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/DE")
+nodePathB = NodePath("../../Puzzle1/DC")
 
-[node name="AE" parent="." index="1" instance=ExtResource( 3 )]
-nodePathA = NodePath("../A")
-nodePathB = NodePath("../E")
+[node name="DC_DB" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/DB")
+nodePathB = NodePath("../../Puzzle1/DC")
 
-[node name="BF" parent="." index="2" instance=ExtResource( 3 )]
-nodePathA = NodePath("../B")
-nodePathB = NodePath("../F")
+[node name="DC_CT" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CT")
+nodePathB = NodePath("../../Puzzle1/DC")
 
-[node name="BC" parent="." index="3" instance=ExtResource( 3 )]
-nodePathA = NodePath("../B")
-nodePathB = NodePath("../C")
+[node name="DB_DA" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/DA")
+nodePathB = NodePath("../../Puzzle1/DB")
 
-[node name="CD" parent="." index="4" instance=ExtResource( 3 )]
-nodePathA = NodePath("../D")
-nodePathB = NodePath("../C")
+[node name="DB_CS" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CS")
+nodePathB = NodePath("../../Puzzle1/DB")
 
-[node name="CG" parent="." index="5" instance=ExtResource( 3 )]
-nodePathA = NodePath("../G")
-nodePathB = NodePath("../C")
+[node name="DA_CZ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CZ")
+nodePathB = NodePath("../../Puzzle1/DA")
 
-[node name="DH" parent="." index="6" instance=ExtResource( 3 )]
-nodePathA = NodePath("../D")
-nodePathB = NodePath("../H")
+[node name="CZ_CY" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CY")
+nodePathB = NodePath("../../Puzzle1/CZ")
 
-[node name="EF" parent="." index="7" instance=ExtResource( 3 )]
-nodePathA = NodePath("../E")
-nodePathB = NodePath("../F")
+[node name="CZ_CQ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CQ")
+nodePathB = NodePath("../../Puzzle1/CZ")
 
-[node name="A" parent="." index="8" instance=ExtResource( 2 )]
-position = Vector2( 69.9803, 69.1 )
+[node name="CY_CX" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CX")
+nodePathB = NodePath("../../Puzzle1/CY")
+
+[node name="CY_CP" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CP")
+nodePathB = NodePath("../../Puzzle1/CY")
+
+[node name="CX_CW" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CW")
+nodePathB = NodePath("../../Puzzle1/CX")
+
+[node name="CX_CO" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CO")
+nodePathB = NodePath("../../Puzzle1/CX")
+
+[node name="CW_CV" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CV")
+nodePathB = NodePath("../../Puzzle1/CW")
+
+[node name="CV_CU" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CU")
+nodePathB = NodePath("../../Puzzle1/CV")
+
+[node name="CV_CM" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CM")
+nodePathB = NodePath("../../Puzzle1/CV")
+
+[node name="CU_CL" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CL")
+nodePathB = NodePath("../../Puzzle1/CU")
+
+[node name="CT_CS" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CS")
+nodePathB = NodePath("../../Puzzle1/CT")
+
+[node name="CS_CR" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CR")
+nodePathB = NodePath("../../Puzzle1/CS")
+
+[node name="CS_CJ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CJ")
+nodePathB = NodePath("../../Puzzle1/CS")
+
+[node name="CR_CQ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CQ")
+nodePathB = NodePath("../../Puzzle1/CR")
+
+[node name="CR_CI" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CI")
+nodePathB = NodePath("../../Puzzle1/CR")
+
+[node name="CP_CO" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CO")
+nodePathB = NodePath("../../Puzzle1/CP")
+
+[node name="CP_CG" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CG")
+nodePathB = NodePath("../../Puzzle1/CP")
+
+[node name="CO_CN" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CN")
+nodePathB = NodePath("../../Puzzle1/CO")
+
+[node name="CO_CF" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CF")
+nodePathB = NodePath("../../Puzzle1/CO")
+
+[node name="CN_CM" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CM")
+nodePathB = NodePath("../../Puzzle1/CN")
+
+[node name="CN_CE" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CE")
+nodePathB = NodePath("../../Puzzle1/CN")
+
+[node name="CM_CL" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CL")
+nodePathB = NodePath("../../Puzzle1/CM")
+
+[node name="CL_CC" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CC")
+nodePathB = NodePath("../../Puzzle1/CL")
+
+[node name="CK_CJ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CJ")
+nodePathB = NodePath("../../Puzzle1/CK")
+
+[node name="CK_CB" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CB")
+nodePathB = NodePath("../../Puzzle1/CK")
+
+[node name="CJ_CA" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CA")
+nodePathB = NodePath("../../Puzzle1/CJ")
+
+[node name="CI_BZ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BZ")
+nodePathB = NodePath("../../Puzzle1/CI")
+
+[node name="CH_CG" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CG")
+nodePathB = NodePath("../../Puzzle1/CH")
+
+[node name="CH_BY" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BY")
+nodePathB = NodePath("../../Puzzle1/CH")
+
+[node name="CG_CF" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CF")
+nodePathB = NodePath("../../Puzzle1/CG")
+
+[node name="CF_CE" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CE")
+nodePathB = NodePath("../../Puzzle1/CF")
+
+[node name="CF_BW" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BW")
+nodePathB = NodePath("../../Puzzle1/CF")
+
+[node name="CE_CD" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CD")
+nodePathB = NodePath("../../Puzzle1/CE")
+
+[node name="CE_BV" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BV")
+nodePathB = NodePath("../../Puzzle1/CE")
+
+[node name="CD_CC" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CC")
+nodePathB = NodePath("../../Puzzle1/CD")
+
+[node name="CD_BU" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BU")
+nodePathB = NodePath("../../Puzzle1/CD")
+
+[node name="CB_CA" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/CA")
+nodePathB = NodePath("../../Puzzle1/CB")
+
+[node name="CB_BS" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BS")
+nodePathB = NodePath("../../Puzzle1/CB")
+
+[node name="CA_BZ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BZ")
+nodePathB = NodePath("../../Puzzle1/CA")
+
+[node name="BZ_BY" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BY")
+nodePathB = NodePath("../../Puzzle1/BZ")
+
+[node name="BZ_BQ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BQ")
+nodePathB = NodePath("../../Puzzle1/BZ")
+
+[node name="BY_BX" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BX")
+nodePathB = NodePath("../../Puzzle1/BY")
+
+[node name="BY_BP" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BP")
+nodePathB = NodePath("../../Puzzle1/BY")
+
+[node name="BX_BO" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BO")
+nodePathB = NodePath("../../Puzzle1/BX")
+
+[node name="BW_BV" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BV")
+nodePathB = NodePath("../../Puzzle1/BW")
+
+[node name="BW_BN" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BN")
+nodePathB = NodePath("../../Puzzle1/BW")
+
+[node name="BU_BT" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BT")
+nodePathB = NodePath("../../Puzzle1/BU")
+
+[node name="BU_BL" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BL")
+nodePathB = NodePath("../../Puzzle1/BU")
+
+[node name="BT_BK" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BK")
+nodePathB = NodePath("../../Puzzle1/BT")
+
+[node name="BS_BJ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BJ")
+nodePathB = NodePath("../../Puzzle1/BS")
+
+[node name="BR_BQ" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BQ")
+nodePathB = NodePath("../../Puzzle1/BR")
+
+[node name="BR_BI" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BI")
+nodePathB = NodePath("../../Puzzle1/BR")
+
+[node name="BQ_BP" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BP")
+nodePathB = NodePath("../../Puzzle1/BQ")
+
+[node name="BQ_BH" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BH")
+nodePathB = NodePath("../../Puzzle1/BQ")
+
+[node name="BP_BO" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BO")
+nodePathB = NodePath("../../Puzzle1/BP")
+
+[node name="BP_BG" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BG")
+nodePathB = NodePath("../../Puzzle1/BP")
+
+[node name="BO_BN" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BN")
+nodePathB = NodePath("../../Puzzle1/BO")
+
+[node name="BN_BM" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BM")
+nodePathB = NodePath("../../Puzzle1/BN")
+
+[node name="BN_BE" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BE")
+nodePathB = NodePath("../../Puzzle1/BN")
+
+[node name="BM_BD" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BD")
+nodePathB = NodePath("../../Puzzle1/BM")
+
+[node name="BL_BK" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BK")
+nodePathB = NodePath("../../Puzzle1/BL")
+
+[node name="BL_BC" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BC")
+nodePathB = NodePath("../../Puzzle1/BL")
+
+[node name="BJ_BI" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BI")
+nodePathB = NodePath("../../Puzzle1/BJ")
+
+[node name="BJ_BA" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BA")
+nodePathB = NodePath("../../Puzzle1/BJ")
+
+[node name="BI_BH" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BH")
+nodePathB = NodePath("../../Puzzle1/BI")
+
+[node name="BI_Z" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/Z")
+nodePathB = NodePath("../../Puzzle1/BI")
+
+[node name="BH_BG" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BG")
+nodePathB = NodePath("../../Puzzle1/BH")
+
+[node name="BH_Y" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/Y")
+nodePathB = NodePath("../../Puzzle1/BH")
+
+[node name="BG_X" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/X")
+nodePathB = NodePath("../../Puzzle1/BG")
+
+[node name="BF_BE" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BE")
+nodePathB = NodePath("../../Puzzle1/BF")
+
+[node name="BF_W" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/W")
+nodePathB = NodePath("../../Puzzle1/BF")
+
+[node name="BE_BD" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BD")
+nodePathB = NodePath("../../Puzzle1/BE")
+
+[node name="BD_BC" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BC")
+nodePathB = NodePath("../../Puzzle1/BD")
+
+[node name="BD_U" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/U")
+nodePathB = NodePath("../../Puzzle1/BD")
+
+[node name="BC_BB" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/BB")
+nodePathB = NodePath("../../Puzzle1/BC")
+
+[node name="BB_S" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/S")
+nodePathB = NodePath("../../Puzzle1/BB")
+
+[node name="BA_Z" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/Z")
+nodePathB = NodePath("../../Puzzle1/BA")
+
+[node name="BA_R" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/R")
+nodePathB = NodePath("../../Puzzle1/BA")
+
+[node name="Z_Y" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/Y")
+nodePathB = NodePath("../../Puzzle1/Z")
+
+[node name="Z_Q" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/Q")
+nodePathB = NodePath("../../Puzzle1/Z")
+
+[node name="Y_X" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/X")
+nodePathB = NodePath("../../Puzzle1/Y")
+
+[node name="X_W" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/W")
+nodePathB = NodePath("../../Puzzle1/X")
+
+[node name="X_O" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/O")
+nodePathB = NodePath("../../Puzzle1/X")
+
+[node name="W_V" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/V")
+nodePathB = NodePath("../../Puzzle1/W")
+
+[node name="W_N" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/N")
+nodePathB = NodePath("../../Puzzle1/W")
+
+[node name="V_U" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/U")
+nodePathB = NodePath("../../Puzzle1/V")
+
+[node name="V_M" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/M")
+nodePathB = NodePath("../../Puzzle1/V")
+
+[node name="U_L" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/L")
+nodePathB = NodePath("../../Puzzle1/U")
+
+[node name="T_S" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/S")
+nodePathB = NodePath("../../Puzzle1/T")
+
+[node name="T_K" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/K")
+nodePathB = NodePath("../../Puzzle1/T")
+
+[node name="S_J" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/J")
+nodePathB = NodePath("../../Puzzle1/S")
+
+[node name="R_I" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/I")
+nodePathB = NodePath("../../Puzzle1/R")
+
+[node name="Q_P" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/P")
+nodePathB = NodePath("../../Puzzle1/Q")
+
+[node name="Q_H" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/H")
+nodePathB = NodePath("../../Puzzle1/Q")
+
+[node name="P_G" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/G")
+nodePathB = NodePath("../../Puzzle1/P")
+
+[node name="O_N" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/N")
+nodePathB = NodePath("../../Puzzle1/O")
+
+[node name="O_F" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/F")
+nodePathB = NodePath("../../Puzzle1/O")
+
+[node name="N_M" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/M")
+nodePathB = NodePath("../../Puzzle1/N")
+
+[node name="M_L" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/L")
+nodePathB = NodePath("../../Puzzle1/M")
+
+[node name="M_D" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/D")
+nodePathB = NodePath("../../Puzzle1/M")
+
+[node name="L_K" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/K")
+nodePathB = NodePath("../../Puzzle1/L")
+
+[node name="L_C" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/C")
+nodePathB = NodePath("../../Puzzle1/L")
+
+[node name="K_J" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/J")
+nodePathB = NodePath("../../Puzzle1/K")
+
+[node name="K_B" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/B")
+nodePathB = NodePath("../../Puzzle1/K")
+
+[node name="I_H" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/H")
+nodePathB = NodePath("../../Puzzle1/I")
+
+[node name="H_G" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/G")
+nodePathB = NodePath("../../Puzzle1/H")
+
+[node name="G_F" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/F")
+nodePathB = NodePath("../../Puzzle1/G")
+
+[node name="F_E" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/E")
+nodePathB = NodePath("../../Puzzle1/F")
+
+[node name="E_D" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/D")
+nodePathB = NodePath("../../Puzzle1/E")
+
+[node name="D_C" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/C")
+nodePathB = NodePath("../../Puzzle1/D")
+
+[node name="B_A" type="Position2D" parent="."]
+script = ExtResource( 2 )
+nodePathA = NodePath("../../Puzzle1/A")
+nodePathB = NodePath("../../Puzzle1/B")
+
+[node name="A" type="Position2D" parent="."]
+position = Vector2( 39.5167, 37.7205 )
+script = ExtResource( 1 )
 point_type = 1
 
-[node name="B" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 122.355, 69.1 )
-node_number = 1
+[node name="B" type="Position2D" parent="."]
+position = Vector2( 103.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 1.0
 
-[node name="C" parent="." index="10" instance=ExtResource( 2 )]
-position = Vector2( 173.85, 69.1 )
-node_number = 2
+[node name="C" type="Position2D" parent="."]
+position = Vector2( 167.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 2.0
 
-[node name="D" parent="." index="11" instance=ExtResource( 2 )]
-position = Vector2( 227.106, 69.1 )
-node_number = 3
+[node name="D" type="Position2D" parent="."]
+position = Vector2( 231.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 3.0
 
-[node name="E" parent="." index="12" instance=ExtResource( 2 )]
-position = Vector2( 69.9803, 118.394 )
-node_number = 4
+[node name="E" type="Position2D" parent="."]
+position = Vector2( 295.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 4.0
 
-[node name="F" parent="." index="13" instance=ExtResource( 2 )]
-position = Vector2( 122.355, 118.394 )
-node_number = 5
+[node name="F" type="Position2D" parent="."]
+position = Vector2( 359.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 5.0
 
-[node name="G" parent="." index="14" instance=ExtResource( 2 )]
-position = Vector2( 173.85, 118.394 )
-node_number = 6
+[node name="G" type="Position2D" parent="."]
+position = Vector2( 423.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 6.0
 
-[node name="H" parent="." index="15" instance=ExtResource( 2 )]
-position = Vector2( 227.106, 118.394 )
-node_number = 7
+[node name="H" type="Position2D" parent="."]
+position = Vector2( 487.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 7.0
 
-[node name="I" parent="." index="16" instance=ExtResource( 2 )]
-position = Vector2( 69.9803, 162.847 )
-node_number = 8
+[node name="I" type="Position2D" parent="."]
+position = Vector2( 551.517, 37.7205 )
+script = ExtResource( 1 )
+node_number = 8.0
 
-[node name="J" parent="." index="17" instance=ExtResource( 2 )]
-position = Vector2( 122.355, 162.847 )
-node_number = 9
+[node name="J" type="Position2D" parent="."]
+position = Vector2( 39.5167, 101.72 )
+script = ExtResource( 1 )
+node_number = 9.0
 
-[node name="K" parent="." index="18" instance=ExtResource( 2 )]
-position = Vector2( 173.85, 162.847 )
-node_number = 10
+[node name="K" type="Position2D" parent="."]
+position = Vector2( 103.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 10.0
 
-[node name="L" parent="." index="19" instance=ExtResource( 2 )]
-position = Vector2( 227.106, 162.847 )
-node_number = 11
+[node name="L" type="Position2D" parent="."]
+position = Vector2( 167.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 11.0
 
-[node name="M" parent="." index="20" instance=ExtResource( 2 )]
-position = Vector2( 69.9803, 209.941 )
-node_number = 12
+[node name="M" type="Position2D" parent="."]
+position = Vector2( 231.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 12.0
 
-[node name="N" parent="." index="21" instance=ExtResource( 2 )]
-position = Vector2( 122.355, 209.941 )
-node_number = 13
+[node name="N" type="Position2D" parent="."]
+position = Vector2( 295.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 13.0
 
-[node name="O" parent="." index="22" instance=ExtResource( 2 )]
-position = Vector2( 173.85, 209.941 )
-node_number = 14
+[node name="O" type="Position2D" parent="."]
+position = Vector2( 359.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 14.0
 
-[node name="P" parent="." index="23" instance=ExtResource( 2 )]
-position = Vector2( 227.106, 209.941 )
-node_number = 15
+[node name="P" type="Position2D" parent="."]
+position = Vector2( 423.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 15.0
 
-[node name="Q" parent="." index="24" instance=ExtResource( 2 )]
-position = Vector2( 273.319, 209.941 )
-node_number = 16
+[node name="Q" type="Position2D" parent="."]
+position = Vector2( 487.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 16.0
+
+[node name="R" type="Position2D" parent="."]
+position = Vector2( 551.517, 101.72 )
+script = ExtResource( 1 )
+node_number = 17.0
+
+[node name="S" type="Position2D" parent="."]
+position = Vector2( 39.5167, 165.72 )
+script = ExtResource( 1 )
+node_number = 18.0
+
+[node name="T" type="Position2D" parent="."]
+position = Vector2( 103.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 19.0
+
+[node name="U" type="Position2D" parent="."]
+position = Vector2( 167.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 20.0
+
+[node name="V" type="Position2D" parent="."]
+position = Vector2( 231.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 21.0
+
+[node name="W" type="Position2D" parent="."]
+position = Vector2( 295.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 22.0
+
+[node name="X" type="Position2D" parent="."]
+position = Vector2( 359.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 23.0
+
+[node name="Y" type="Position2D" parent="."]
+position = Vector2( 423.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 24.0
+
+[node name="Z" type="Position2D" parent="."]
+position = Vector2( 487.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 25.0
+
+[node name="BA" type="Position2D" parent="."]
+position = Vector2( 551.517, 165.72 )
+script = ExtResource( 1 )
+node_number = 26.0
+
+[node name="BB" type="Position2D" parent="."]
+position = Vector2( 39.5167, 229.72 )
+script = ExtResource( 1 )
+node_number = 27.0
+
+[node name="BC" type="Position2D" parent="."]
+position = Vector2( 103.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 28.0
+
+[node name="BD" type="Position2D" parent="."]
+position = Vector2( 167.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 29.0
+
+[node name="BE" type="Position2D" parent="."]
+position = Vector2( 231.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 30.0
+
+[node name="BF" type="Position2D" parent="."]
+position = Vector2( 295.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 31.0
+
+[node name="BG" type="Position2D" parent="."]
+position = Vector2( 359.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 32.0
+
+[node name="BH" type="Position2D" parent="."]
+position = Vector2( 423.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 33.0
+
+[node name="BI" type="Position2D" parent="."]
+position = Vector2( 487.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 34.0
+
+[node name="BJ" type="Position2D" parent="."]
+position = Vector2( 551.517, 229.72 )
+script = ExtResource( 1 )
+node_number = 35.0
+
+[node name="BK" type="Position2D" parent="."]
+position = Vector2( 39.5167, 293.72 )
+script = ExtResource( 1 )
+node_number = 36.0
+
+[node name="BL" type="Position2D" parent="."]
+position = Vector2( 103.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 37.0
+
+[node name="BM" type="Position2D" parent="."]
+position = Vector2( 167.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 38.0
+
+[node name="BN" type="Position2D" parent="."]
+position = Vector2( 231.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 39.0
+
+[node name="BO" type="Position2D" parent="."]
+position = Vector2( 295.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 40.0
+
+[node name="BP" type="Position2D" parent="."]
+position = Vector2( 359.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 41.0
+
+[node name="BQ" type="Position2D" parent="."]
+position = Vector2( 423.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 42.0
+
+[node name="BR" type="Position2D" parent="."]
+position = Vector2( 487.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 43.0
+
+[node name="BS" type="Position2D" parent="."]
+position = Vector2( 551.517, 293.72 )
+script = ExtResource( 1 )
+node_number = 44.0
+
+[node name="BT" type="Position2D" parent="."]
+position = Vector2( 39.5167, 357.72 )
+script = ExtResource( 1 )
+node_number = 45.0
+
+[node name="BU" type="Position2D" parent="."]
+position = Vector2( 103.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 46.0
+
+[node name="BV" type="Position2D" parent="."]
+position = Vector2( 167.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 47.0
+
+[node name="BW" type="Position2D" parent="."]
+position = Vector2( 231.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 48.0
+
+[node name="BX" type="Position2D" parent="."]
+position = Vector2( 295.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 49.0
+
+[node name="BY" type="Position2D" parent="."]
+position = Vector2( 359.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 50.0
+
+[node name="BZ" type="Position2D" parent="."]
+position = Vector2( 423.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 51.0
+
+[node name="CA" type="Position2D" parent="."]
+position = Vector2( 487.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 52.0
+
+[node name="CB" type="Position2D" parent="."]
+position = Vector2( 551.517, 357.72 )
+script = ExtResource( 1 )
+node_number = 53.0
+
+[node name="CC" type="Position2D" parent="."]
+position = Vector2( 39.5167, 421.72 )
+script = ExtResource( 1 )
+node_number = 54.0
+
+[node name="CD" type="Position2D" parent="."]
+position = Vector2( 103.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 55.0
+
+[node name="CE" type="Position2D" parent="."]
+position = Vector2( 167.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 56.0
+
+[node name="CF" type="Position2D" parent="."]
+position = Vector2( 231.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 57.0
+
+[node name="CG" type="Position2D" parent="."]
+position = Vector2( 295.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 58.0
+
+[node name="CH" type="Position2D" parent="."]
+position = Vector2( 359.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 59.0
+
+[node name="CI" type="Position2D" parent="."]
+position = Vector2( 423.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 60.0
+
+[node name="CJ" type="Position2D" parent="."]
+position = Vector2( 487.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 61.0
+
+[node name="CK" type="Position2D" parent="."]
+position = Vector2( 551.517, 421.72 )
+script = ExtResource( 1 )
+node_number = 62.0
+
+[node name="CL" type="Position2D" parent="."]
+position = Vector2( 39.5167, 485.72 )
+script = ExtResource( 1 )
+node_number = 63.0
+
+[node name="CM" type="Position2D" parent="."]
+position = Vector2( 103.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 64.0
+
+[node name="CN" type="Position2D" parent="."]
+position = Vector2( 167.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 65.0
+
+[node name="CO" type="Position2D" parent="."]
+position = Vector2( 231.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 66.0
+
+[node name="CP" type="Position2D" parent="."]
+position = Vector2( 295.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 67.0
+
+[node name="CQ" type="Position2D" parent="."]
+position = Vector2( 359.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 68.0
+
+[node name="CR" type="Position2D" parent="."]
+position = Vector2( 423.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 69.0
+
+[node name="CS" type="Position2D" parent="."]
+position = Vector2( 487.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 70.0
+
+[node name="CT" type="Position2D" parent="."]
+position = Vector2( 551.517, 485.72 )
+script = ExtResource( 1 )
+node_number = 71.0
+
+[node name="CU" type="Position2D" parent="."]
+position = Vector2( 39.5167, 549.72 )
+script = ExtResource( 1 )
+node_number = 72.0
+
+[node name="CV" type="Position2D" parent="."]
+position = Vector2( 103.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 73.0
+
+[node name="CW" type="Position2D" parent="."]
+position = Vector2( 167.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 74.0
+
+[node name="CX" type="Position2D" parent="."]
+position = Vector2( 231.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 75.0
+
+[node name="CY" type="Position2D" parent="."]
+position = Vector2( 295.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 76.0
+
+[node name="CZ" type="Position2D" parent="."]
+position = Vector2( 359.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 77.0
+
+[node name="DA" type="Position2D" parent="."]
+position = Vector2( 423.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 78.0
+
+[node name="DB" type="Position2D" parent="."]
+position = Vector2( 487.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 79.0
+
+[node name="DC" type="Position2D" parent="."]
+position = Vector2( 551.517, 549.72 )
+script = ExtResource( 1 )
+node_number = 80.0
+
+[node name="DE" type="Position2D" parent="."]
+position = Vector2( 616.181, 549.72 )
+script = ExtResource( 1 )
+node_number = 81
 point_type = 2
+
+[node name="PassOnNodeConstraint3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 167.517, 37.7205 )
+target_node = NodePath("../C")
+
+[node name="PassOnNodeConstraint4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 551.517, 37.7205 )
+target_node = NodePath("../I")
+
+[node name="PassOnNodeConstraint5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 39.5167, 549.72 )
+target_node = NodePath("../CU")
+
+[node name="PassOnNodeConstraint6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 359.517, 421.72 )
+target_node = NodePath("../CH")
+
+[node name="PassOnNodeConstraint7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 103.517, 229.72 )
+target_node = NodePath("../BC")
+
+[node name="PassOnNodeConstraint8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 39.5167, 357.72 )
+target_node = NodePath("../BT")
+
+[node name="PassOnNodeConstraint9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 231.517, 101.72 )
+target_node = NodePath("../M")
+
+[node name="PassOnNodeConstraint10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 359.517, 165.72 )
+target_node = NodePath("../X")
+
+[node name="PassOnNodeConstraint11" parent="." instance=ExtResource( 4 )]
+position = Vector2( 487.517, 421.72 )
+target_node = NodePath("../CJ")
+
+[node name="Triangles" parent="." instance=ExtResource( 5 )]
+position = Vector2( 389.18, 326.312 )
+
+[node name="Triangles2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 197.584, 456.837 )
+count = 3
+
+[node name="Triangles3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 392.772, 131.722 )
+count = 4
+
+[node name="CountConstraint3" parent="." instance=ExtResource( 6 )]
+count = 4
+
+[node name="PassOnEdgeConstraint" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../G_F")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint2" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../P_G")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint3" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../Q_P")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint4" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../Z_Q")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint5" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../Z_Y")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint6" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../Y_X")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint7" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../X_O")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint8" parent="CountConstraint3" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../O_F")
+allow_same_color = true
+required = true
+
+[node name="CountConstraint2" parent="." instance=ExtResource( 6 )]
+count = 3
+
+[node name="PassOnEdgeConstraint" parent="CountConstraint2" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../CN_CE")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint2" parent="CountConstraint2" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../CF_CE")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint3" parent="CountConstraint2" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../CO_CN")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint4" parent="CountConstraint2" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../CO_CF")
+allow_same_color = true
+required = true
+
+[node name="CountConstraint" parent="." instance=ExtResource( 6 )]
+count = 2
+
+[node name="PassOnEdgeConstraint" parent="CountConstraint" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../BQ_BP")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint2" parent="CountConstraint" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../BZ_BQ")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint3" parent="CountConstraint" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../BZ_BY")
+allow_same_color = true
+required = true
+
+[node name="PassOnEdgeConstraint4" parent="CountConstraint" instance=ExtResource( 7 )]
+visible = false
+target_edge = NodePath("../../BY_BP")
+allow_same_color = true
+required = true

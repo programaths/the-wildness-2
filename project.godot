@@ -435,8 +435,13 @@ _global_script_class_icons={
 [application]
 
 config/name="TheWitness"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://puzzles/Puzzle0.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/dpi/allow_hidpi=true
+window/vsync/vsync_via_compositor=true
 
 [editor_plugins]
 

@@ -2,6 +2,7 @@ extends KinematicBody
 
 onready var pivot = $Pivot
 onready var camera = $Pivot/Camera
+onready var puzzle_camera = $PuzzleCamera
 class_name Player
 
 func _ready():
@@ -64,16 +65,23 @@ func get_camera():
 	return camera
 
 func _on_Puzzle_end_solving():
+	camera.current = true
 	solving_puzzle = false
-	
 
 
 func _on_Puzzle_start_solving():
 	solving_puzzle = true
-	
+
+var nb = 0
+func draw_attention_to(position:Vector3):
+	puzzle_camera.current = true
+	nb = nb+1
+	if nb>20:
+		print("looking at: ",position)
+		nb=0
+	puzzle_camera.look_at(position,Vector3.UP)
 
 
-
-
-func _on_Puzzle0_start_solving():
-	pass # Replace with function body.
+func _on_Puzzle_puzzle_dot_position_changed(dot_position):
+	if solving_puzzle:
+		draw_attention_to(dot_position)
